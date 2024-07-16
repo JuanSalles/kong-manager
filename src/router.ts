@@ -4,8 +4,20 @@ import {
 
 import { config } from 'config'
 import { useInfoStore } from './stores/info'
+import Cookies from 'js-cookie'
+import axios from 'axios'
 
 const routes: Array<RouteRecordRaw> = [
+  // login page
+  {
+    name: 'login',
+    path: '/login',
+    component: () => import('@/pages/login/LoginPage.vue'),
+    meta: {
+      title: 'Login',
+    },
+  },
+
   // overview page
   {
     name: 'overview',
@@ -473,8 +485,46 @@ export const router = createRouter({
   routes,
 })
 
-router.beforeEach(() => {
+// Função para verificar se o cookie JWT existe
+async function isAuthenticated(): Promise<boolean> {
+  // Substitua esta lógica pela sua verificação de cookie JWT
+  const token = Cookies.get('km_token')
+
+  if (!token) {
+    return false
+  }
+  try {
+    // Substitua 'http://seu-backend.com/api/verifyToken' pelo seu endpoint real
+    const response = await axios.post('http://localhost:4000', { token })
+
+    // Supondo que o backend retorne { valid: true } para um token válido
+    return response.data.valid
+  } catch (error) {
+    console.error('Erro ao verificar o token:', error)
+    return false
+  }
+}
+
+router.beforeEach((to, from, next) => {
   const infoStore = useInfoStore()
 
+  // Busca informações do usuário de forma silenciosa
   infoStore.getInfo({ silent: true })
+
+  // Verifica se o usuário está autenticado
+  isAuthenticated().then((userIsAuthenticated) => {
+    if (to.name === 'login' && userIsAuthenticated) {
+      // Se o usuário já estiver logado e tentar acessar a tela de login, redireciona para overview
+      next({ name: 'overview' })
+    } else if (to.name !== 'login' && !userIsAuthenticated) {
+      // Se tentar acessar qualquer rota que não seja a de login sem estar autenticado, redireciona para /login
+      next({ name: 'login' })
+    } else {
+      // Caso contrário, prossegue normalmente
+      next()
+    }
+  }).catch(() => {
+    console.log('Erro ao verificar autenticação:')
+    next({ name: 'login' })
+  })
 })
