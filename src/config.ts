@@ -55,4 +55,8 @@ export const config = {
   get ANONYMOUS_REPORTS() {
     return getConfig('ANONYMOUS_REPORTS', false)
   },
+
+  get AUTHENTICATION_ENDPOINT() {
+    return getConfig('AUTHENTICATION_ENDPOINT', null)
+  },
 }

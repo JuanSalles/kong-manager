@@ -72,6 +72,19 @@
     "feature.5": "Deploy an API Dev Portal with registration management"
   },
   "entities": {
+    "admin-users": {
+      "list.title": "Admin Users",
+      "detail.title": "Admin User: {username}",
+      "create.form.title": "New Admin User",
+      "session.form.title": "Admin User",
+      "updatePassword.form.title": "Update Password",
+      "create.form.description": "Admin Users are users who can access the Kong Manager and perform administrative tasks.",
+      "create.form.error": "Failed to create Admin User",
+      "deleted": "Admin User \"{username}\" successfully deleted!",
+      "updated": "Admin User \"{username}\" password successfully updated!",
+      "created": "Admin User \"{username}\" successfully created!",
+      "description": "Admin Users are users who can access the Kong Manager and perform administrative tasks."
+    },
     "service": {
       "description": "Gateway Service entities are abstractions of each of your own upstream services, e.g., a data transformation microservice, a billing API.",
       "created": "Gateway Service \"{name}\" successfully created!",

@@ -12,6 +12,7 @@ class ApiService {
   constructor() {
     this.instance = axios.create({
       timeout: 30000,
+      withCredentials: true,
     })
   }
 

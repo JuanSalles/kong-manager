@@ -2,14 +2,16 @@
   <AppLayout
     :sidebar-top-items="sidebarItems"
   >
-    <template #navbar-right>
+    <!-- <template #navbar-right>
       <GithubStar url="https://github.com/kong/kong" />
-    </template>
+    </template> -->
     <template #sidebar-header>
       <NavbarLogo />
     </template>
+    <template #sidebar-footer>
+      <AccountTools />
+    </template>
     <router-view />
-    <MakeAWish />
     <!--Empty element just for Teleport, KHCP-11277-->
     <div id="kong-ui-app-page-header-action-button" />
   </AppLayout>
@@ -20,10 +22,9 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { AppLayout, type SidebarPrimaryItem } from '@kong-ui-public/app-layout'
-import { GithubStar } from '@kong-ui-public/misc-widgets'
 import { useInfoStore } from '@/stores/info'
 import NavbarLogo from '@/components/NavbarLogo.vue'
-import MakeAWish from '@/components/MakeAWish.vue'
+import AccountTools from './components/AccountTools.vue'
 
 const route = useRoute()
 const infoStore = useInfoStore()
@@ -102,6 +103,12 @@ const sidebarItems = computed<Array<SidebarPrimaryItem>>(() => [
     key: 'Key Sets',
     active: route.meta?.entity === 'key-set',
   },
+  {
+    name: 'Admin Users',
+    to: { name: 'admin-users' },
+    key: 'Admin Users',
+    active: route.meta?.entity === 'admin-user',
+  },
   ...(
     isHybridMode.value
       ? [
@@ -115,6 +122,7 @@ const sidebarItems = computed<Array<SidebarPrimaryItem>>(() => [
       : []
   ),
 ])
+
 </script>
 
 <style scoped lang="scss">
@@ -134,4 +142,6 @@ const sidebarItems = computed<Array<SidebarPrimaryItem>>(() => [
   border-top-left-radius: $kui-border-radius-0 !important;
   border-top-right-radius: $kui-border-radius-0 !important;
 }
+
+
 </style>

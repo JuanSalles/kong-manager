@@ -17,43 +17,45 @@
         required
       >
       <button type="submit">
-        Login
+        Entrar
       </button>
+      <div
+        class="errorMsg"
+        v-if="errorMsg"
+      >
+        {{ errorMsg }}
+      </div>
     </form>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-import Cookies from 'js-cookie'
+import { authService } from '@/services/authService'
+
 export default {
   name: 'LoginPage',
   data() {
     return {
       username: '',
       password: '',
+      errorMsg: null,
     }
   },
   methods: {
     async submitForm() {
       try {
-        // Substitua 'http://seu-backend.com/api/login' pelo seu endpoint real
-        const response = await axios.post('http://localhost:4000', {
+        const data = {
           username: this.username,
           password: this.password,
-        })
-
-        // Supondo que o backend retorne o token JWT em response.data.token
-        const token = response.data.token
-
-        // Salva o token JWT nos cookies com o nome 'km_token'
-        Cookies.set('km_token', token) // O token epira por sessao
-
-        // Redirecionar o usuário para a página inicial ou dashboard após o login
-        this.$router.push({ name: 'overview' })
+        }
+        const res = await authService.login(data)
+        if (res.status != 200) {
+          this.errorMsg = res.data.message
+        } else {
+          window.location.reload()
+        }
       } catch (error) {
-        console.error('Erro ao fazer login')
-        // Tratar erro de login aqui (ex: mostrar mensagem de erro)
+        this.errorMsg = error.response.data.message ? error.response.data.message : error.message
       }
     },
   },
@@ -63,14 +65,16 @@ export default {
 <style scoped>
 .login {
   max-width: 400px;
-  margin: 0 auto;
+  margin: 50px auto 0;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: none;
 }
 
 h1 {
   text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 2rem;
 }
 
 form {
@@ -80,19 +84,49 @@ form {
 
 label {
   margin-bottom: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgb(108, 116, 137);
 }
 
 input {
   padding: 10px;
   margin-bottom: 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: rgb(241, 241, 241);
 }
 
-button {
-  padding: 10px;
-  background-color: #007bff;
+input:focus {
+  outline: none;
+  background-color: rgb(245, 245, 245);
+}
+button{
+  font-family: "Inter", Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  background-color: #0044f4;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+button:hover {
+  background-color: #0039d1;
+  text-decoration: none;
+}
+
+.errorMsg {
+  color: #d60027;
+  font-weight: 500;
+  margin-top: 10px;
 }
 </style>
