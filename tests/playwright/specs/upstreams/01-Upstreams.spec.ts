@@ -501,7 +501,7 @@ test.describe('upstreams', () => {
         const active = await getPropertyValue(page, 'active').innerText()
 
         expect(JSON.parse(passive)).toEqual(JSON.parse('{"type": "http", "healthy": {"successes": 0, "http_statuses": [200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]}, "unhealthy": {"http_statuses": [429, 500, 503], "tcp_failures": 0, "timeouts": 0, "http_failures": 0}}'))
-        expect(JSON.parse(active)).toEqual(JSON.parse('{"concurrency": 10, "healthy": {"interval": 5, "http_statuses": [200, 302], "successes": 5}, "unhealthy": {"interval": 5, "tcp_failures": 0, "timeouts": 0, "http_failures": 5, "http_statuses": [429, 404, 500, 501, 502, 503, 504, 505]}, "headers": {}, "type": "http", "https_sni": null, "https_verify_certificate": true, "http_path": "/", "timeout": 1}'))
+        expect(JSON.parse(active)).toEqual(JSON.parse('{"concurrency": 10, "healthy": {"interval": 5, "http_statuses": [200, 302], "successes": 5}, "unhealthy": {"interval": 5, "tcp_failures": 5, "timeouts": 0, "http_failures": 5, "http_statuses": [429, 404, 500, 501, 502, 503, 504, 505]}, "headers": {}, "type": "http", "https_sni": null, "https_verify_certificate": true, "http_path": "/", "timeout": 1}'))
       },
     )
 
@@ -517,8 +517,8 @@ test.describe('upstreams', () => {
         const passive = await getPropertyValue(page, 'passive').innerText()
         const active = await getPropertyValue(page, 'active').innerText()
 
-        expect(JSON.parse(passive)).toEqual(JSON.parse('{"type": "http", "healthy": {"successes": 80, "http_statuses": [200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]}, "unhealthy": {"http_statuses": [429, 500, 503], "tcp_failures": 0, "timeouts": 5, "http_failures": 5}}'))
-        expect(JSON.parse(active)).toEqual(JSON.parse('{"concurrency": 10, "healthy": {"interval": 5, "http_statuses": [200, 302], "successes": 5}, "unhealthy": {"interval": 5, "tcp_failures": 0, "timeouts": 0, "http_failures": 5, "http_statuses": [429, 404, 500, 501, 502, 503, 504, 505]}, "headers": {}, "type": "http", "https_sni": null, "https_verify_certificate": true, "http_path": "/", "timeout": 1}'))
+        expect(JSON.parse(passive)).toEqual(JSON.parse('{"type": "http", "healthy": {"successes": 80, "http_statuses": [200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]}, "unhealthy": {"http_statuses": [429, 500, 503], "tcp_failures": 5, "timeouts": 5, "http_failures": 5}}'))
+        expect(JSON.parse(active)).toEqual(JSON.parse('{"concurrency": 10, "healthy": {"interval": 5, "http_statuses": [200, 302], "successes": 5}, "unhealthy": {"interval": 5, "tcp_failures": 5, "timeouts": 0, "http_failures": 5, "http_statuses": [429, 404, 500, 501, 502, 503, 504, 505]}, "headers": {}, "type": "http", "https_sni": null, "https_verify_certificate": true, "http_path": "/", "timeout": 1}'))
       },
     )
 
@@ -534,8 +534,8 @@ test.describe('upstreams', () => {
         const passive = await getPropertyValue(page, 'passive').innerText()
         const active = await getPropertyValue(page, 'active').innerText()
 
-        expect(JSON.parse(passive)).toEqual(JSON.parse('{"type": "http", "healthy": {"successes": 80, "http_statuses": [200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]}, "unhealthy": {"http_statuses": [429, 500, 503], "tcp_failures": 0, "timeouts": 5, "http_failures": 5}}'))
-        expect(JSON.parse(active)).toEqual(JSON.parse('{"concurrency": 10, "healthy": {"interval": 0, "http_statuses": [200, 302], "successes": 5}, "unhealthy": {"interval": 0, "tcp_failures": 0, "timeouts": 0, "http_failures": 5, "http_statuses": [429, 404, 500, 501, 502, 503, 504, 505]}, "headers": {}, "type": "http", "https_sni": null, "https_verify_certificate": true, "http_path": "/", "timeout": 1}'))
+        expect(JSON.parse(passive)).toEqual(JSON.parse('{"type": "http", "healthy": {"successes": 80, "http_statuses": [200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]}, "unhealthy": {"http_statuses": [429, 500, 503], "tcp_failures": 5, "timeouts": 5, "http_failures": 5}}'))
+        expect(JSON.parse(active)).toEqual(JSON.parse('{"concurrency": 10, "healthy": {"interval": 0, "http_statuses": [200, 302], "successes": 0}, "unhealthy": {"interval": 0, "tcp_failures": 0, "timeouts": 0, "http_failures": 0, "http_statuses": [429, 404, 500, 501, 502, 503, 504, 505]}, "headers": {}, "type": "http", "https_sni": null, "https_verify_certificate": true, "http_path": "/", "timeout": 1}'))
       },
     )
 
@@ -552,7 +552,7 @@ test.describe('upstreams', () => {
         const active = await getPropertyValue(page, 'active').innerText()
 
         expect(JSON.parse(passive)).toEqual(JSON.parse('{"type": "http", "healthy": {"successes": 0, "http_statuses": [200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]}, "unhealthy": {"http_statuses": [429, 500, 503], "tcp_failures": 0, "timeouts": 0, "http_failures": 0}}'))
-        expect(JSON.parse(active)).toEqual(JSON.parse('{"concurrency": 10, "healthy": {"interval": 0, "http_statuses": [200, 302], "successes": 5}, "unhealthy": {"interval": 0, "tcp_failures": 0, "timeouts": 0, "http_failures": 5, "http_statuses": [429, 404, 500, 501, 502, 503, 504, 505]}, "headers": {}, "type": "http", "https_sni": null, "https_verify_certificate": true, "http_path": "/", "timeout": 1}'))
+        expect(JSON.parse(active)).toEqual(JSON.parse('{"concurrency": 10, "healthy": {"interval": 0, "http_statuses": [200, 302], "successes": 0}, "unhealthy": {"interval": 0, "tcp_failures": 0, "timeouts": 0, "http_failures": 0, "http_statuses": [429, 404, 500, 501, 502, 503, 504, 505]}, "headers": {}, "type": "http", "https_sni": null, "https_verify_certificate": true, "http_path": "/", "timeout": 1}'))
       },
     )
   })
@@ -561,7 +561,8 @@ test.describe('upstreams', () => {
     const locator = page.locator(selector)
 
     // open dropdown
-    await locator.locator('.multiselect-trigger').click({ position: { x: 1, y: 1 } })
+
+    await locator.locator('.multiselect-trigger').click()
     for (let index = 0, len = statuses.length; index < len; index++) {
       await locator.locator(`.multiselect-item[data-testid="multiselect-item-${statuses[index]}"]`).click()
     }
@@ -587,8 +588,8 @@ test.describe('upstreams', () => {
         const passive = await getPropertyValue(page, 'passive').innerText()
         const active = await getPropertyValue(page, 'active').innerText()
 
-        expect(JSON.parse(passive)).toEqual(JSON.parse('{"type": "http", "healthy": {"successes": 80, "http_statuses": [200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]}, "unhealthy": {"http_statuses": [429, 500, 503], "tcp_failures": 0, "timeouts": 5, "http_failures": 5}}'))
-        expect(JSON.parse(active)).toEqual(JSON.parse('{"concurrency": 10, "healthy": {"interval": 5, "http_statuses": [200, 302], "successes": 5}, "unhealthy": {"interval": 5, "tcp_failures": 0, "timeouts": 0, "http_failures": 5, "http_statuses": [429, 404, 500, 501, 502, 503, 504, 505]}, "headers": {}, "type": "http", "https_sni": null, "https_verify_certificate": true, "http_path": "/", "timeout": 1}'))
+        expect(JSON.parse(passive)).toEqual(JSON.parse('{"type": "http", "healthy": {"successes": 80, "http_statuses": [200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308]}, "unhealthy": {"http_statuses": [429, 500, 503], "tcp_failures": 5, "timeouts": 5, "http_failures": 5}}'))
+        expect(JSON.parse(active)).toEqual(JSON.parse('{"concurrency": 10, "healthy": {"interval": 5, "http_statuses": [200, 302], "successes": 5}, "unhealthy": {"interval": 5, "tcp_failures": 5, "timeouts": 0, "http_failures": 5, "http_statuses": [429, 404, 500, 501, 502, 503, 504, 505]}, "headers": {}, "type": "http", "https_sni": null, "https_verify_certificate": true, "http_path": "/", "timeout": 1}'))
       },
     )
 
@@ -628,8 +629,8 @@ test.describe('upstreams', () => {
         const passive = await getPropertyValue(page, 'passive').innerText()
         const active = await getPropertyValue(page, 'active').innerText()
 
-        expect(JSON.parse(passive)).toEqual(JSON.parse('{ "healthy": { "successes": 8, "http_statuses": [ 200 ] }, "type": "http", "unhealthy": { "timeouts": 10, "http_failures": 10, "http_statuses": [ 429, 500, 503, 100, 101 ], "tcp_failures": 0 } }'))
-        expect(JSON.parse(active)).toEqual(JSON.parse('{ "headers": { "h1": [ "v1", "v2" ] }, "http_path": "/path", "https_sni": null, "concurrency": 15, "type": "http", "https_verify_certificate": true, "healthy": { "http_statuses": [ 200, 302, 100, 103 ], "successes": 10, "interval": 10 }, "unhealthy": { "timeouts": 10, "http_failures": 10, "http_statuses": [ 404, 429, 500, 501, 502, 503, 504, 505, 100, 101 ], "interval": 10, "tcp_failures": 0 }, "timeout": 5 }'))
+        expect(JSON.parse(passive)).toEqual(JSON.parse('{ "healthy": { "successes": 8, "http_statuses": [ 200 ] }, "type": "http", "unhealthy": { "timeouts": 10, "http_failures": 10, "http_statuses": [ 429, 500, 503, 100, 101 ], "tcp_failures": 5 } }'))
+        expect(JSON.parse(active)).toEqual(JSON.parse('{ "headers": { "h1": [ "v1", "v2" ] }, "http_path": "/path", "https_sni": null, "concurrency": 15, "type": "http", "https_verify_certificate": true, "healthy": { "http_statuses": [ 200, 302, 100, 103 ], "successes": 10, "interval": 10 }, "unhealthy": { "timeouts": 10, "http_failures": 10, "http_statuses": [ 404, 429, 500, 501, 502, 503, 504, 505, 100, 101 ], "interval": 10, "tcp_failures": 5 }, "timeout": 5 }'))
       },
     )
   })
@@ -666,11 +667,11 @@ test.describe('upstreams', () => {
           const passive = await getPropertyValue(page, 'passive').innerText()
           const active = await getPropertyValue(page, 'active').innerText()
           if (check_type.ssl) {
-            expect(JSON.parse(passive)).toEqual(JSON.parse('{ "healthy": { "successes": 80, "http_statuses": [ 200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308 ] }, "type": "http", "unhealthy": { "timeouts": 5, "http_failures": 5, "http_statuses": [ 429, 500, 503 ], "tcp_failures": 0 } }'))
-            expect(JSON.parse(active)).toEqual(JSON.parse(`{ "headers": {}, "http_path": "/", "https_sni": "sni", "concurrency": 10, "type": "${check_type.protocol}", "https_verify_certificate": ${!verify_ssl}, "healthy": { "http_statuses": [ 200, 302 ], "successes": 5, "interval": 5 }, "unhealthy": { "timeouts": 0, "http_failures": 5, "http_statuses": [ 429, 404, 500, 501, 502, 503, 504, 505 ], "interval": 5, "tcp_failures": 0 }, "timeout": 1 }`))
+            expect(JSON.parse(passive)).toEqual(JSON.parse('{ "healthy": { "successes": 80, "http_statuses": [ 200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308 ] }, "type": "http", "unhealthy": { "timeouts": 5, "http_failures": 5, "http_statuses": [ 429, 500, 503 ], "tcp_failures": 5 } }'))
+            expect(JSON.parse(active)).toEqual(JSON.parse(`{ "headers": {}, "http_path": "/", "https_sni": "sni", "concurrency": 10, "type": "${check_type.protocol}", "https_verify_certificate": ${!verify_ssl}, "healthy": { "http_statuses": [ 200, 302 ], "successes": 5, "interval": 5 }, "unhealthy": { "timeouts": 0, "http_failures": 5, "http_statuses": [ 429, 404, 500, 501, 502, 503, 504, 505 ], "interval": 5, "tcp_failures": 5 }, "timeout": 1 }`))
           } else {
-            expect(JSON.parse(passive)).toEqual(JSON.parse('{ "healthy": { "successes": 80, "http_statuses": [ 200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308 ] }, "type": "http", "unhealthy": { "timeouts": 5, "http_failures": 5, "http_statuses": [ 429, 500, 503 ], "tcp_failures": 0 } }'))
-            expect(JSON.parse(active)).toEqual(JSON.parse(`{ "headers": {}, "http_path": "/", "https_sni": null, "concurrency": 10, "type": "${check_type.protocol}", "https_verify_certificate": true, "healthy": { "http_statuses": [ 200, 302 ], "successes": 5, "interval": 5 }, "unhealthy": { "timeouts": 0, "http_failures": 5, "http_statuses": [ 429, 404, 500, 501, 502, 503, 504, 505 ], "interval": 5, "tcp_failures": 0 }, "timeout": 1 }`))
+            expect(JSON.parse(passive)).toEqual(JSON.parse('{ "healthy": { "successes": 80, "http_statuses": [ 200, 201, 202, 203, 204, 205, 206, 207, 208, 226, 300, 301, 302, 303, 304, 305, 306, 307, 308 ] }, "type": "http", "unhealthy": { "timeouts": 5, "http_failures": 5, "http_statuses": [ 429, 500, 503 ], "tcp_failures": 5 } }'))
+            expect(JSON.parse(active)).toEqual(JSON.parse(`{ "headers": {}, "http_path": "/", "https_sni": null, "concurrency": 10, "type": "${check_type.protocol}", "https_verify_certificate": true, "healthy": { "http_statuses": [ 200, 302 ], "successes": 5, "interval": 5 }, "unhealthy": { "timeouts": 0, "http_failures": 5, "http_statuses": [ 429, 404, 500, 501, 502, 503, 504, 505 ], "interval": 5, "tcp_failures": 5 }, "timeout": 1 }`))
           }
         },
       )
